@@ -2,7 +2,7 @@ var loaded = 0;
 var frames = [];
 var frame = [];
 var speed = 10;
-var wantedframecount = 2;
+var wantedframecount = 1;
 var trueframecount = 0;
 var defaultsquare = [255, 255, 255];
 var currentframe = 0;
@@ -41,12 +41,18 @@ var addframes = function(a) {
         frames.push(frame);
     }
 }
+var deleteframe = function() {
+  if (currentframe != 0) {
+  	frames.splice(currentframe,1);
+    currentframe -= 1;
+  }
+}
 
 function draw() {
     if (wantedframecount > trueframecount) {
         addframes(wantedframecount - trueframecount);
         trueframecount += wantedframecount - trueframecount;
-    }
+    } else if (trueframecount > wantedframecount) {deleteframe(); trueframecount -= 1;}
     for (var framey in frames) {
         if (frames[framey].length < 100) {
             frames[framey].push(defaultsquare);
@@ -217,8 +223,17 @@ function keyPressed() {
         currentframe += 1;
       }
     } else if (keyCode == 65) {
-    if (currentframe > 0) {
-    	currentframe -= 1;
+    	if (currentframe > 0) {
+    		currentframe -= 1;
     }
-    }
+    } else if (keyCode == 221) {
+			wantedframecount += 1;
+      currentframe += 1;
+      console.log(currentframe, " ",wantedframecount, " ", trueframecount);
+		} else if (keyCode == 219) {
+      	if (wantedframecount > 1) {
+					wantedframecount -= 1;
+          console.log(currentframe, " ",wantedframecount, " ", trueframecount);
+      }
+		}
 }
