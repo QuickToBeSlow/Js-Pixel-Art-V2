@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+    <script>
+        //var CurrentColor= document.getElementById("newtext");
+        //CurrentColor.style.right = "465px";
+        //CurrentColor.style.down = "175px";
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var loaded = 0;
+        var frames = [];
+        var frame = [];
+        var speed = 10;
+        var wantedframecount = 1;
+        var trueframecount = 0;
+        var defaultsquare = [255, 255, 255];
+        var currentframe = 0;
+        var pressed = 0;
+        var w = 40;
+        var value1 = 0;
+        var value2 = 0;
+        var value3 = 0;
+        var direction = 10;
+        var valueholder1a = 0
+        var valueholder1b = 0
+        var valueholder1c = 0
+        var valueholder2a = 0
+        var valueholder2b = 0
+        var valueholder2c = 255
+        var valueholder3a = 255
+        var valueholder3b = 0
+        var valueholder3c = 0
+        var valueholder4a = 0
+        var valueholder4b = 255
+        var valueholder4c = 0
+        var valueholder5a = 255
+        var valueholder5b = 255
+        var valueholder5c = 255
+        var save_or_load = 0;
+
+
+        var addframes = function(a) {
+            for (var count = 0; count < a; count++) {
+                frames.push(frame);
+            }
+        }
+        var deleteframe = function() {
+            if (currentframe != 0) {
+                frames.splice(currentframe, 1);
+                currentframe -= 1;
+            }
+        }
+
+        var draw = function() {
+            if (wantedframecount > trueframecount) {
+                addframes(wantedframecount - trueframecount);
+                trueframecount += wantedframecount - trueframecount;
+            } else if (trueframecount > wantedframecount) {
+                deleteframe();
+                trueframecount -= 1;
+            }
+            for (var framey in frames) {
+                if (frames[framey].length < 100) {
+                    frames[framey].push(defaultsquare);
+                    loaded = 0;
+                } else if (frames[framey].length >= 100) {
+                    loaded = 1;
+                    for (var frameyy = 0; frameyy < 100; frameyy++) {
+                        ctx.fillStyle = "rgb(" + frames[currentframe][frameyy] + ")";
+                        ctx.fillRect(frameyy % 10 * w, Math.floor(frameyy / 10) * w, w, w);
+                    }
+                }
+            }
+            ctx.fillStyle = "rgb(127, 127, 127)";
+            ctx.fillRect(400, 0, 200, 400);
+            ctx.fillRect(-10, 400, 620, 210);
+            ctx.fillStyle = "rgb(" + value1 + ", " + value2 + ", " + value3 + ")";
+            ctx.fillRect(450, 50, 100, 100);
+            ctx.fillStyle = "rgb(0, 255, 0)";
+            ctx.fillRect(425, 200, 25, 25);
+            ctx.fillRect(487, 200, 25, 25);
+            ctx.fillRect(550, 200, 25, 25);
+            ctx.fillStyle = "rgb(255, 0, 0)";
+            ctx.fillRect(425, 250, 25, 25);
+            ctx.fillRect(487, 250, 25, 25);
+            ctx.fillRect(550, 250, 25, 25);
+            ctx.fillStyle = "rgb(0, 255, 0)";
+            ctx.fillStyle = "rgb(127, 255, 255)";
+            //text("Saved Colors", 465, 315);
+            ctx.fillStyle = "rgb(" + valueholder1a + ", " + valueholder1b + ", " + valueholder1c + ")";
+            ctx.fillRect(430, 325, 20, 20);
+            ctx.fillStyle = "rgb(" + valueholder2a + ", " + valueholder2b + ", " + valueholder2c + ")";
+            ctx.fillRect(460, 325, 20, 20);
+            ctx.fillStyle = "rgb(" + valueholder3a + ", " + valueholder3b + ", " + valueholder3c + ")";
+            ctx.fillRect(490, 325, 20, 20);
+            ctx.fillStyle = "rgb(" + valueholder4a + ", " + valueholder4b + ", " + valueholder4c + ")";
+            ctx.fillRect(520, 325, 20, 20);
+            ctx.fillStyle = "rgb(" + valueholder5a + ", " + valueholder5b + ", " + valueholder5c + ")";
+            ctx.fillRect(550, 325, 20, 20);
+            ctx.fillStyle = "rgb(0, 255, 0)";
+            //text(value1, 465, 25);
+            //text(value2, 490, 25);
+            //text(value3, 515, 25);
+            ctx.fillStyle = "rgb(127, 255, 255)";
+            //text("Current Frame:", 0, 415);
+            //text(currentframe + 1, 85, 415);
+        }
+        document.onmousemove = MousePosition;
+        var MousePosition = function(evt) {
+          evt = evt || window.event;
+            if (evt.clientX < 400 && evt.clientY < 400 && evt.clientX >= 0 && evt.clientY >= 0 && pressed == 1 && loaded == 1) {
+                frames[currentframe][(Math.floor(evt.clientX / w) + Math.floor(evt.clientY / w) * 10)] = [value1, value2, value3];
+            }
+            if (evt.clientX >= 425 && evt.clientY >= 200 && evt.clientX <= 450 && evt.clientY <= 225 && value1 < 255 && pressed == 1 && value1 >= 0) {
+                value1 = value1 + 1;
+            }
+            if (evt.clientX >= 487 && evt.clientY >= 200 && evt.clientX <= 512 && evt.clientY <= 225 && value2 < 255 && pressed == 1 && value2 >= 0) {
+                value2 = value2 + 1;
+            }
+            if (evt.clientX >= 550 && evt.clientY >= 200 && evt.clientX <= 575 && evt.clientY <= 225 && value3 < 255 && pressed == 1 && value3 >= 0) {
+                value3 = value3 + 1;
+            }
+            if (evt.clientX >= 550 && evt.clientY >= 250 && evt.clientX <= 575 && evt.clientY <= 275 && value3 <= 255 && pressed == 1 && value3 > 0) {
+                value3 = value3 - 1;
+            }
+            if (evt.clientX >= 487 && evt.clientY >= 250 && evt.clientX <= 512 && evt.clientY <= 275 && value2 <= 255 && pressed == 1 && value2 > 0) {
+                value2 = value2 - 1;
+            }
+            if (evt.clientX >= 425 && evt.clientY >= 250 && evt.clientX <= 450 && evt.clientY <= 275 && value1 <= 255 && pressed == 1 && value1 > 0) {
+                value1 = value1 - 1;
+            }
+            }
+
+        document.getElementById("myCanvas").onmousedown = function() {MouseDown()};
+        var MouseDown = function() {
+            pressed = 1;
+        }
+
+        document.getElementById("myCanvas").onmouseup = function() {MouseUp()};
+        var MouseUp = function() {
+            pressed = 0;
+        }
+        document.getElementById("myCanvas").onkeydown = function() {KeyDown(event.charCode)};
+        var KeyDown = function(event) {
+            event = event || window.event;
+            if (event == 38) {
+                if (value2 <= 255 && value2 >= 0) {
+                    value2 = value2 + direction;
+                }
+                if (value2 > 255) {
+                    value2 = 255;
+                }
+                if (value2 < 0) {
+                    value2 = 0;
+                }
+
+            } else if (event == 39) {
+
+                if (value3 <= 255 && value3 >= 0) {
+                    value3 = value3 + direction;
+                }
+                if (value3 > 255) {
+                    value3 = 255;
+                }
+                if (value3 < 0) {
+                    value3 = 0;
+                }
+            } else if (event == 37) {
+
+                if (value1 <= 255 && value1 >= 0) {
+                    value1 = value1 + direction;
+                }
+                if (value1 > 255) {
+                    value1 = 255;
+                }
+                if (value1 < 0) {
+                    value1 = 0;
+                }
+            } else if (event == 40) {
+                for (var frameyy = 0; frameyy < 100; frameyy++) {
+                    frames[currentframe][frameyy] = defaultsquare;
+                }
+            } else if (event == 187) {
+                direction = 10;
+            } else if (event == 189) {
+                direction = -10;
+            } else if (event == 83) {
+                save_or_load = 1;
+            } else if (event == 76) {
+                save_or_load = 2;
+            } else if (event == 49 && save_or_load == 1) {
+                valueholder1a = value1;
+                valueholder1b = value2;
+                valueholder1c = value3;
+            } else if (event == 49 && save_or_load == 2) {
+                value1 = valueholder1a;
+                value2 = valueholder1b;
+                value3 = valueholder1c;
+            } else if (event == 50 && save_or_load == 1) {
+                valueholder2a = value1;
+                valueholder2b = value2;
+                valueholder2c = value3;
+            } else if (event == 50 && save_or_load == 2) {
+                value1 = valueholder2a;
+                value2 = valueholder2b;
+                value3 = valueholder2c;
+            } else if (event == 51 && save_or_load == 1) {
+                valueholder3a = value1;
+                valueholder3b = value2;
+                valueholder3c = value3;
+            } else if (event == 51 && save_or_load == 2) {
+                value1 = valueholder3a;
+                value2 = valueholder3b;
+                value3 = valueholder3c;
+            } else if (event == 52 && save_or_load == 1) {
+                valueholder4a = value1;
+                valueholder4b = value2;
+                valueholder4c = value3;
+            } else if (event == 52 && save_or_load == 2) {
+                value1 = valueholder4a;
+                value2 = valueholder4b;
+                value3 = valueholder4c;
+            } else if (event == 53 && save_or_load == 1) {
+                valueholder5a = value1;
+                valueholder5b = value2;
+                valueholder5c = value3;
+            } else if (event == 53 && save_or_load == 2) {
+                value1 = valueholder5a;
+                value2 = valueholder5b;
+                value3 = valueholder5c;
+            } else if (event == 67) {
+                console.log(frames);
+            } else if (event == 68) {
+                if (trueframecount > currentframe + 1) {
+                    currentframe += 1;
+                }
+            } else if (event == 65) {
+                if (currentframe > 0) {
+                    currentframe -= 1;
+                }
+            } else if (event == 221) {
+                wantedframecount += 1;
+                currentframe += 1;
+                console.log(currentframe, " ", wantedframecount, " ", trueframecount);
+            } else if (event == 219) {
+                if (wantedframecount > 1) {
+                    wantedframecount -= 1;
+                    console.log(currentframe, " ", wantedframecount, " ", trueframecount);
+                }
+            }
+        }
+        var framerate = 30
+        setInterval(function() {
+            draw()
+        }, Math.floor(1000 / framerate));
+    </script>
+
+</body>
+
+</html>
