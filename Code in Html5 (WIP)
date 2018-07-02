@@ -114,6 +114,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             //text(currentframe + 1, 85, 415);
         }
         var MousePosition = function(event) {
+          event = event || window.event;
             if (event.clientX < 400 && event.clientY < 400 && event.clientX >= 0 && event.clientY >= 0 && pressed === 1 && loaded === 1) {
                 frames[currentframe][(Math.floor(event.clientX / w) + Math.floor(event.clientY / w) * 10)] = [value1, value2, value3];
             }
@@ -139,15 +140,14 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
         var MouseDown = function() {
             pressed = 1;
-          ctx.fillStyle = "rgb(0,0,0)";
-          ctx.fillRect(100,100,200,200);
+          alert("Working.");
         }
 
         var MouseUp = function() {
             pressed = 0;
         }
         var KeyDown = function(event) {
-            var keycode = event.charCode || event.keyCode;
+            var keycode = event.which || event.keyCode;
             if (keycode === 38) {
                 if (value2 <= 255 && value2 >= 0) {
                     value2 = value2 + direction;
@@ -263,5 +263,3 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 </body>
 
 </html>
-
-
