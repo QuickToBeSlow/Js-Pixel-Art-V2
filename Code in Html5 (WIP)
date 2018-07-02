@@ -5,14 +5,11 @@
 
     <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
-    <div onmousemove="MousePosition(event)"></div>
-    <div onmousedown="MouseDown()"></div>
-    <div onmouseup="MouseUp()"></div>
-    <div onkeydown="KeyDown(event)"></div>
     <script>
         //var CurrentColor= document.getElementById("newtext");
         //CurrentColor.style.right = "465px";
         //CurrentColor.style.down = "175px";
+      	document.onkeydown = KeyDown;
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         var loaded = 0;
@@ -138,17 +135,17 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             }
         }
 
-        var MouseDown = function() {
+        function MouseDown() {
             pressed = 1;
           alert("Working.");
         }
 
-        var MouseUp = function() {
+        function MouseUp() {
             pressed = 0;
         }
-        var KeyDown = function(event) {
-            var keycode = event.which || event.keyCode;
-            if (keycode === 38) {
+        function KeyDown(event) {
+            event = event || window.event;
+            if (event.keyCode === 38) {
                 if (value2 <= 255 && value2 >= 0) {
                     value2 = value2 + direction;
                 }
@@ -159,7 +156,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                     value2 = 0;
                 }
 
-            } else if (keycode === 39) {
+            } else if (event.keyCode === 39) {
 
                 if (value3 <= 255 && value3 >= 0) {
                     value3 = value3 + direction;
@@ -170,7 +167,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 if (value3 < 0) {
                     value3 = 0;
                 }
-            } else if (keycode === 37) {
+            } else if (event.keyCode === 37) {
 
                 if (value1 <= 255 && value1 >= 0) {
                     value1 = value1 + direction;
@@ -181,73 +178,73 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 if (value1 < 0) {
                     value1 = 0;
                 }
-            } else if (keycode === 40) {
+            } else if (event.keyCode === 40) {
                 for (var frameyy = 0; frameyy < 100; frameyy++) {
                     frames[currentframe][frameyy] = [defaultsquare];
                 }
-            } else if (keycode === 187) {
+            } else if (event.keyCode === 187) {
                 direction = 10;
-            } else if (keycode === 189) {
+            } else if (event.keyCode === 189) {
                 direction = -10;
-            } else if (keycode === 83) {
+            } else if (event.keyCode === 83) {
                 save_or_load = 1;
-            } else if (keycode === 76) {
+            } else if (event.keyCode === 76) {
                 save_or_load = 2;
-            } else if (keycode === 49 && save_or_load === 1) {
+            } else if (event.keyCode === 49 && save_or_load === 1) {
                 valueholder1a = value1;
                 valueholder1b = value2;
                 valueholder1c = value3;
-            } else if (keycode === 49 && save_or_load === 2) {
+            } else if (event.keyCode === 49 && save_or_load === 2) {
                 value1 = valueholder1a;
                 value2 = valueholder1b;
                 value3 = valueholder1c;
-            } else if (keycode === 50 && save_or_load === 1) {
+            } else if (event.keyCode === 50 && save_or_load === 1) {
                 valueholder2a = value1;
                 valueholder2b = value2;
                 valueholder2c = value3;
-            } else if (keycode === 50 && save_or_load === 2) {
+            } else if (event.keyCode === 50 && save_or_load === 2) {
                 value1 = valueholder2a;
                 value2 = valueholder2b;
                 value3 = valueholder2c;
-            } else if (keycode === 51 && save_or_load === 1) {
+            } else if (event.keyCode === 51 && save_or_load === 1) {
                 valueholder3a = value1;
                 valueholder3b = value2;
                 valueholder3c = value3;
-            } else if (keycode === 51 && save_or_load === 2) {
+            } else if (event.keyCode === 51 && save_or_load === 2) {
                 value1 = valueholder3a;
                 value2 = valueholder3b;
                 value3 = valueholder3c;
-            } else if (keycode === 52 && save_or_load === 1) {
+            } else if (event.keyCode === 52 && save_or_load === 1) {
                 valueholder4a = value1;
                 valueholder4b = value2;
                 valueholder4c = value3;
-            } else if (keycode === 52 && save_or_load === 2) {
+            } else if (event.keyCode === 52 && save_or_load === 2) {
                 value1 = valueholder4a;
                 value2 = valueholder4b;
                 value3 = valueholder4c;
-            } else if (keycode === 53 && save_or_load === 1) {
+            } else if (event.keyCode === 53 && save_or_load === 1) {
                 valueholder5a = value1;
                 valueholder5b = value2;
                 valueholder5c = value3;
-            } else if (keycode === 53 && save_or_load === 2) {
+            } else if (event.keyCode === 53 && save_or_load === 2) {
                 value1 = valueholder5a;
                 value2 = valueholder5b;
                 value3 = valueholder5c;
-            } else if (keycode === 67) {
+            } else if (event.keyCode === 67) {
                 console.log(frames);
-            } else if (keycode === 68) {
+            } else if (event.keyCode === 68) {
                 if (trueframecount > currentframe + 1) {
                     currentframe += 1;
                 }
-            } else if (keycode === 65) {
+            } else if (event.keyCode === 65) {
                 if (currentframe > 0) {
                     currentframe -= 1;
                 }
-            } else if (keycode === 221) {
+            } else if (event.keyCode === 221) {
                 wantedframecount += 1;
                 currentframe += 1;
                 console.log(currentframe, " ", wantedframecount, " ", trueframecount);
-            } else if (keycode === 219) {
+            } else if (event.keyCode === 219) {
                 if (wantedframecount > 1) {
                     wantedframecount -= 1;
                     console.log(currentframe, " ", wantedframecount, " ", trueframecount);
