@@ -2,13 +2,13 @@
 <html>
 
 <body>
-  <p id="CurrentColor">test</p>
+
     <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
     <script>
-        var CurrentColor= document.getElementById("CurrentColor");
-        CurrentColor.style.right = "465px";
-        CurrentColor.style.down = "175px";
+        //var CurrentColor= document.getElementById("CurrentColor");
+        //CurrentColor.style.right = "465px";
+        //CurrentColor.style.down = "175px";
       	document.onkeydown = KeyDown;
       	document.onmousedown = MouseDown;
       	document.onmouseup = MouseUp;
@@ -94,7 +94,8 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             ctx.fillRect(550, 250, 25, 25);
             ctx.fillStyle = "rgb(0, 255, 0)";
             ctx.fillStyle = "rgb(127, 255, 255)";
-            //text("Saved Colors", 465, 315);
+          	ctx.font = "12px Arial";
+            ctx.fillText("Saved Colors", 465, 315);
             ctx.fillStyle = "rgb(" + valueholder1a + ", " + valueholder1b + ", " + valueholder1c + ")";
             ctx.fillRect(430, 325, 20, 20);
             ctx.fillStyle = "rgb(" + valueholder2a + ", " + valueholder2b + ", " + valueholder2c + ")";
@@ -105,13 +106,16 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             ctx.fillRect(520, 325, 20, 20);
             ctx.fillStyle = "rgb(" + valueholder5a + ", " + valueholder5b + ", " + valueholder5c + ")";
             ctx.fillRect(550, 325, 20, 20);
-            ctx.fillStyle = "rgb(0, 255, 0)";
-            //text(value1, 465, 25);
-            //text(value2, 490, 25);
-            //text(value3, 515, 25);
             ctx.fillStyle = "rgb(127, 255, 255)";
-            //text("Current Frame:", 0, 415);
-            //text(currentframe + 1, 85, 415);
+          	ctx.font = "12px Arial";
+            ctx.fillText(value1, 465, 25);
+          	ctx.font = "12px Arial";
+            ctx.fillText(value2, 490, 25);
+          	ctx.font = "12px Arial";
+            ctx.fillText(value3, 515, 25);
+            ctx.fillStyle = "rgb(127, 255, 255)";
+            ctx.fillText("Current Frame:", 0, 415);
+            ctx.fillText(currentframe + 1, 85, 415);
         }
         function MousePosition(event) {
           event = event || window.event;
