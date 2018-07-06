@@ -1,1 +1,1 @@
-go to alphaeditor.p5js.org in order to use the program. Right now, the bug I am trying to fix is the bug that edits all of the frames inside of the array instead of just the one I selected.
+The purpose of this project is to create a functional animation maker in which the user draws with large pixels of any color and can edit multiple frames of the animation separately. Of course there will be many other important features, but that's just the basics.
