@@ -6,6 +6,7 @@
     <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
     <script>
+      	var x = -1; var y = -1;
       	document.onkeydown = KeyDown;
       	document.onmousedown = MouseDown;
       	document.onmouseup = MouseUp;
@@ -42,6 +43,13 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         var valueholder5b = 255
         var valueholder5c = 255
         var save_or_load = 0;
+
+        function MousePosition(event) {
+          event = event || window.event;
+          x = event.clientX;
+          y = event.clientY;
+
+        }
 
 
         var addframes = function(a) {
@@ -113,28 +121,25 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             ctx.fillStyle = "rgb(127, 255, 255)";
             ctx.fillText("Current Frame:", 0, 415);
             ctx.fillText(currentframe + 1, 85, 415);
-        }
-        function MousePosition(event) {
-          event = event || window.event;
-            if (event.clientX < 400 && event.clientY < 400 && event.clientX >= 0 && event.clientY >= 0 && pressed === 1 && loaded === 1) {
-                frames[currentframe][(Math.floor(event.clientX / w) + Math.floor(event.clientY / w) * 10)] = [value1, value2, value3];
+            if (x < 400 && y < 400 && x >= 0 && y >= 0 && pressed === 1 && loaded === 1) {
+                frames[currentframe][(Math.floor(x / w) + Math.floor(y / w) * 10)] = [value1, value2, value3];
             }
-            if (event.clientX >= 425 && event.clientY >= 200 && event.clientX <= 450 && event.clientY <= 225 && value1 < 255 && pressed === 1 && value1 >= 0) {
+            if (x >= 425 && y >= 200 && x <= 450 && y <= 225 && value1 < 255 && pressed === 1 && value1 >= 0) {
                 value1 = value1 + 1;
             }
-            if (event.clientX >= 487 && event.clientY >= 200 && event.clientX <= 512 && event.clientY <= 225 && value2 < 255 && pressed === 1 && value2 >= 0) {
+            if (x >= 487 && y >= 200 && x <= 512 && y <= 225 && value2 < 255 && pressed === 1 && value2 >= 0) {
                 value2 = value2 + 1;
             }
-            if (event.clientX >= 550 && event.clientY >= 200 && event.clientX <= 575 && event.clientY <= 225 && value3 < 255 && pressed === 1 && value3 >= 0) {
+            if (x >= 550 && y >= 200 && x <= 575 && y <= 225 && value3 < 255 && pressed === 1 && value3 >= 0) {
                 value3 = value3 + 1;
             }
-            if (event.clientX >= 550 && event.clientY >= 250 && event.clientX <= 575 && event.clientY <= 275 && value3 <= 255 && pressed === 1 && value3 > 0) {
+            if (x >= 550 && y >= 250 && x <= 575 && y <= 275 && value3 <= 255 && pressed === 1 && value3 > 0) {
                 value3 = value3 - 1;
             }
-            if (event.clientX >= 487 && event.clientY >= 250 && event.clientX <= 512 && event.clientY <= 275 && value2 <= 255 && pressed === 1 && value2 > 0) {
+            if (x >= 487 && y >= 250 && x <= 512 && y <= 275 && value2 <= 255 && pressed === 1 && value2 > 0) {
                 value2 = value2 - 1;
             }
-            if (event.clientX >= 425 && event.clientY >= 250 && event.clientX <= 450 && event.clientY <= 275 && value1 <= 255 && pressed === 1 && value1 > 0) {
+            if (x >= 425 && y >= 250 && x <= 450 && y <= 275 && value1 <= 255 && pressed === 1 && value1 > 0) {
                 value1 = value1 - 1;
             }
         }
