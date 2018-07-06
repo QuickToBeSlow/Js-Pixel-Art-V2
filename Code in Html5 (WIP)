@@ -2,14 +2,17 @@
 <html>
 
 <body>
-
+  <p id="CurrentColor">test</p>
     <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
     <script>
-        //var CurrentColor= document.getElementById("newtext");
-        //CurrentColor.style.right = "465px";
-        //CurrentColor.style.down = "175px";
+        var CurrentColor= document.getElementById("CurrentColor");
+        CurrentColor.style.right = "465px";
+        CurrentColor.style.down = "175px";
       	document.onkeydown = KeyDown;
+      	document.onmousedown = MouseDown;
+      	document.onmouseup = MouseUp;
+      	document.onmousemove = MousePosition;
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         var loaded = 0;
@@ -110,7 +113,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
             //text("Current Frame:", 0, 415);
             //text(currentframe + 1, 85, 415);
         }
-        var MousePosition = function(event) {
+        function MousePosition(event) {
           event = event || window.event;
             if (event.clientX < 400 && event.clientY < 400 && event.clientX >= 0 && event.clientY >= 0 && pressed === 1 && loaded === 1) {
                 frames[currentframe][(Math.floor(event.clientX / w) + Math.floor(event.clientY / w) * 10)] = [value1, value2, value3];
@@ -137,7 +140,6 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
         function MouseDown() {
             pressed = 1;
-          alert("Working.");
         }
 
         function MouseUp() {
