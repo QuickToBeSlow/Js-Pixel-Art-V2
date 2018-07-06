@@ -259,9 +259,9 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 }
             }
         }
-        var framerate = 30
+        var framerate = 30;
         setInterval(function() {
-            draw()
+            draw();
         }, Math.floor(1000 / framerate));
     </script>
 
