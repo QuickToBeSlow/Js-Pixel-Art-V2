@@ -54,19 +54,19 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         }
 
 
-        var addframes = function(a) {
+        function addframes(a) {
             for (var count = 0; count < a; count++) {
                 frames.push(frame);
             }
         }
-        var deleteframe = function() {
+        function deleteframes() {
             if (currentframe != 0) {
                 frames.splice(currentframe, 1);
                 currentframe -= 1;
             }
         }
 
-        var draw = function() {
+        function draw() {
             if (wantedframecount > trueframecount) {
                 addframes(wantedframecount - trueframecount);
                 trueframecount += wantedframecount - trueframecount;
