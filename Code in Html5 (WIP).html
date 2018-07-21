@@ -54,19 +54,19 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         }
 
 
-        function addframes(a) {
+        var addframes = function(a) {
             for (var count = 0; count < a; count++) {
                 frames.push(frame);
             }
         }
-        function deleteframe() {
+        var deleteframe = function() {
             if (currentframe != 0) {
                 frames.splice(currentframe, 1);
                 currentframe -= 1;
             }
         }
 
-        function draw() {
+        var draw = function() {
             if (wantedframecount > trueframecount) {
                 addframes(wantedframecount - trueframecount);
                 trueframecount += wantedframecount - trueframecount;
@@ -75,10 +75,10 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 trueframecount -= 1;
             }
             for (var framey in frames) {
-                if (frames[framey].length < totalsquares) {
-                    frames[framey].push(defaultsquare);
+                if (frames[currentframe].length < totalsquares) {
+                    frames[currentframe].push(defaultsquare);
                     loaded = 0;
-                } else if (frames[framey].length >= totalsquares) {
+                } else if (frames[currentframe].length >= totalsquares) {
                     loaded = 1;
                     for (var frameyy = 0; frameyy < totalsquares; frameyy++) {
                         ctx.fillStyle = "rgb(" + frames[currentframe][frameyy] + ")";
