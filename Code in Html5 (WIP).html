@@ -45,28 +45,23 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         var save_or_load = 0;
       	var totalsquares = (400/w)*(400/w);
       	var squarerow = (400/w);
-
         function MousePosition(event) {
           event = event || window.event;
           x = event.clientX-8;
           y = event.clientY-8;
-
         }
-
-
-        var addframes = function(a) {
+        function addframes(a) {
             for (var count = 0; count < a; count++) {
                 frames.push(frame);
             }
         }
-        var deleteframe = function() {
+        function deleteframe() {
             if (currentframe != 0) {
                 frames.splice(currentframe, 1);
                 currentframe -= 1;
             }
         }
-
-        var draw = function() {
+        function draw() {
             if (wantedframecount > trueframecount) {
                 addframes(wantedframecount - trueframecount);
                 trueframecount += wantedframecount - trueframecount;
@@ -145,11 +140,9 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 value1 = value1 - 1;
             }
         }
-
         function MouseDown() {
             pressed = 1;
         }
-
         function MouseUp() {
             pressed = 0;
         }
@@ -165,9 +158,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                 if (value2 < 0) {
                     value2 = 0;
                 }
-
             } else if (event.keyCode === 39) {
-
                 if (value3 <= 255 && value3 >= 0) {
                     value3 = value3 + direction;
                 }
@@ -178,7 +169,6 @@ Your browser does not support the HTML5 canvas tag.</canvas>
                     value3 = 0;
                 }
             } else if (event.keyCode === 37) {
-
                 if (value1 <= 255 && value1 >= 0) {
                     value1 = value1 + direction;
                 }
